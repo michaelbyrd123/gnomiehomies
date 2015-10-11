@@ -155,8 +155,6 @@ var Game = {
         }
         
     },
-
-
     generateApple: function(){
 
         // Chose a random place on the grid.
@@ -169,8 +167,6 @@ var Game = {
         // Add a new apple.
         apple = game.add.sprite(randomX, randomY, 'apple');
     },
-    
-    
     appleCollision: function() {
     
         // Check if any part of the snake is overlapping the apple.
@@ -197,7 +193,6 @@ var Game = {
         }
     
     },
-
     selfCollision: function(head) {
     
         // Check if the head of the snake overlaps with any part of the snake.
@@ -210,7 +205,6 @@ var Game = {
         }
     
     },
-
     wallCollision: function(head) {
     
         // Check if the head of the snake is in the boundaries of the game field.

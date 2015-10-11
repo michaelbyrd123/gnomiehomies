@@ -78,9 +78,9 @@
 
 </div>
 <form method="post" action="process.php">
-	<input type="text" name="map_name"/>
-	<textarea name="map_data"></textarea>
-	<input type="submit" value="Submit"/>
+	<input type="text" name="map_name" value="<?php echo $_GET['loadmap']; ?>"/><input type="submit" value="Save Map"/> <br>
+	<textarea name="map_data"><?php if(isset($_GET['loadmap'])){ include("/home/ubuntu/workspace/mapedit/maps/".$_GET['loadmap']); } ?></textarea>
+	
 </form>
 
 <ul>
@@ -98,11 +98,19 @@
 
 </ul>
 <hr>
+<h3>Load Existing Map</h3>
 <?php
-$dir = $_SERVER["DOCUMENT_ROOT"]."/maps";
+$dir = "/home/ubuntu/workspace/mapedit/maps";
 $files1 = scandir($dir);
 
-print_r($files1);
+
+foreach($files1 as $file){
+	if($file != "."){
+		if($file != ".."){
+			echo '<a href="?loadmap='.$file.'">'.$file.'</a><br>';
+		}
+	}
+}
 ?>
 
 
@@ -110,6 +118,32 @@ print_r($files1);
 
 <script type="text/javascript">
 $(function () {
+	
+var val = $('textarea').val();
+	var val = val.toUpperCase();
+	var chars = val.split('');
+	//console.log(chars);
+
+	$( "#preview" ).html("");
+	chars.forEach(function(entry) {
+    	
+    	
+    	//console.log(entry);
+    	if(entry.indexOf("\n")==-1){
+
+				$( "#preview" ).append( "<div class='MAP-"+entry+"'></div>" );
+		
+		
+		}else{
+		  
+
+				$( "#preview" ).append( "<hr>" );
+
+		}
+	});
+	
+
+	
 $('textarea').bind('input propertychange', function() {	
 	var val = $(this).val();
 	var val = val.toUpperCase();
@@ -134,6 +168,8 @@ $('textarea').bind('input propertychange', function() {
 		}
 	});
 });
+
+
 
 });
 </script>
