@@ -97,8 +97,13 @@
 	<li><strong>D</strong> Wall Texture</li>
 
 </ul>
+<hr>
+<?php
+$dir = $_SERVER["DOCUMENT_ROOT"]."/maps";
+$files1 = scandir($dir);
 
-	
+print_r($files1);
+?>
 
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
