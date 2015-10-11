@@ -154,9 +154,7 @@ var Game = {
             this.wallCollision(firstCell);
         }
         
-        
-    
-},
+    },
 
 
     generateApple: function(){
@@ -173,57 +171,57 @@ var Game = {
     },
     
     
-appleCollision: function() {
-
-    // Check if any part of the snake is overlapping the apple.
-    // This is needed if the apple spawns inside of the snake.
-    for(var i = 0; i < snake.length; i++){
-        if(snake[i].x == apple.x && snake[i].y == apple.y){
-
-            // Next time the snake moves, a new block will be added to its length.
-            addNew = true;
-
-            // Destroy the old apple.
-            apple.destroy();
-
-            // Make a new one.
-            this.generateApple();
-
-            // Increase score.
-            score++;
-
-            // Refresh scoreboard.
-            scoreTextValue.text = score.toString();
-
+    appleCollision: function() {
+    
+        // Check if any part of the snake is overlapping the apple.
+        // This is needed if the apple spawns inside of the snake.
+        for(var i = 0; i < snake.length; i++){
+            if(snake[i].x == apple.x && snake[i].y == apple.y){
+    
+                // Next time the snake moves, a new block will be added to its length.
+                addNew = true;
+    
+                // Destroy the old apple.
+                apple.destroy();
+    
+                // Make a new one.
+                this.generateApple();
+    
+                // Increase score.
+                score++;
+    
+                // Refresh scoreboard.
+                scoreTextValue.text = score.toString();
+    
+            }
         }
-    }
+    
+    },
 
-},
+    selfCollision: function(head) {
+    
+        // Check if the head of the snake overlaps with any part of the snake.
+        for(var i = 0; i < snake.length - 1; i++){
+            if(head.x == snake[i].x && head.y == snake[i].y){
+    
+                // If so, go to game over screen.
+                game.state.start('Game_Over');
+            }
+        }
+    
+    },
 
-selfCollision: function(head) {
-
-    // Check if the head of the snake overlaps with any part of the snake.
-    for(var i = 0; i < snake.length - 1; i++){
-        if(head.x == snake[i].x && head.y == snake[i].y){
-
-            // If so, go to game over screen.
+    wallCollision: function(head) {
+    
+        // Check if the head of the snake is in the boundaries of the game field.
+    
+        if(head.x >= 600 || head.x < 0 || head.y >= 450 || head.y < 0){
+    
+    
+            // If it's not in, we've hit a wall. Go to game over screen.
             game.state.start('Game_Over');
         }
+    
     }
-
-},
-
-wallCollision: function(head) {
-
-    // Check if the head of the snake is in the boundaries of the game field.
-
-    if(head.x >= 600 || head.x < 0 || head.y >= 450 || head.y < 0){
-
-
-        // If it's not in, we've hit a wall. Go to game over screen.
-        game.state.start('Game_Over');
-    }
-
-}
 
 };
